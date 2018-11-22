@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.lmigu.appei.CriarPlaylistActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="1"
+            tools:layout_editor_absoluteX="89dp"
+            tools:layout_editor_absoluteY="16dp">
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="183dp"
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="Music" />
+
+                <TextView
+                    android:layout_width="183dp"
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="Emotion Detected" />
+
+                <TextView
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="Final Emotion" />
+            </TableRow>
+
+            <TableRow>
+
+                <Spinner
+                    android:id="@+id/spinner1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="183dp"
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="celula2" />
+
+                <TextView
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="celula2" />
+            </TableRow>
+
+            <TableRow>
+
+                <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="180dp"
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="celula4" />
+
+                <TextView
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="celula2" />
+            </TableRow>
+
+            <TableRow>
+
+                <Spinner
+                    android:id="@+id/spinner3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="celula6" />
+
+                <TextView
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="celula2" />
+            </TableRow>
+
+            <TableRow>
+
+                <Spinner
+                    android:id="@+id/spinner4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="celula8" />
+
+                <TextView
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="celula2" />
+            </TableRow>
+
+            <TableRow>
+
+                <Spinner
+                    android:id="@+id/spinner5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="celula10" />
+
+                <TextView
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="celula2" />
+            </TableRow>
+
+            <TableRow>
+
+                <Spinner
+                    android:id="@+id/spinner6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="celula4" />
+
+                <TextView
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="celula2" />
+            </TableRow>
+
+            <TableRow>
+
+                <Spinner
+                    android:id="@+id/spinner7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="celula2" />
+
+                <TextView
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="celula4" />
+            </TableRow>
+
+            <TableRow>
+
+                <Spinner
+                    android:id="@+id/spinner8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="celula2" />
+
+                <TextView
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="celula4" />
+            </TableRow>
+
+            <TableRow>
+
+                <Spinner
+                    android:id="@+id/spinner9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="celula2" />
+
+                <TextView
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="celula4" />
+            </TableRow>
+
+            <TableRow>
+
+                <Spinner
+                    android:id="@+id/spinner10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="celula2" />
+
+                <TextView
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="celula4" />
+            </TableRow>
+            e
+        </TableLayout>
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>
