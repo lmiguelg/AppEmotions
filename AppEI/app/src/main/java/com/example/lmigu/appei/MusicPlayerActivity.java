@@ -32,6 +32,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
     TextView remainingTimeLabel;
     MediaPlayer mp;
     Uri audio;
+
     int totalTime;
 
     private static final int REQ_PERMISSION = 120;
@@ -50,26 +51,6 @@ public class MusicPlayerActivity extends AppCompatActivity {
         remainingTimeLabel = (TextView) findViewById(R.id.remainingTimeLabel);
 
         // Media Player
-//        mp = new MediaPlayer();
-//        mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
-//
-//
-//
-//
-//
-//
-//        try {
-//            //necess´rio verificar a premissão
-//            // na lista das musicas quando criar i intent passar junto com ele a
-//            //premissão para aquele determinado fincheiro
-//
-//            mp.setDataSource(getApplicationContext(), audio);
-//            mp.prepare();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            Log.d("uriaudio:",audio.toString());
-//        }
-
         mp = MediaPlayer.create(this, R.raw.music);
 
         mp.start();
@@ -184,6 +165,12 @@ public class MusicPlayerActivity extends AppCompatActivity {
             playBtn.setBackgroundResource(R.drawable.play);
         }
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mp.pause();
     }
 
     public void requestPermission(){

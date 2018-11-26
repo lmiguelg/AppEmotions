@@ -1,4 +1,15 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/tools">
     <string name="app_name">App EI</string>
     <string name="select_audio_file_title">asasas</string>
+
+
+    <string-array name="arrayEmojis">
+        <item><ImageButton android:background="@drawable/happy_emoji" android:id="@+id/btn_happy" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="5dp" /></item>
+        <item><ImageButton android:background="@drawable/sad_emoji" android:id="@+id/btn_sad" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="5dp" /></item>
+
+        <item><ImageButton android:background="@drawable/neutral_emoji" android:id="@+id/btn_neutral" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="5dp" /></item>
+        <item><ImageButton android:background="@drawable/neutral_emoji" android:id="@+id/btn_angry" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="5dp" /></item>
+    </string-array>
+
+
 </resources>
