@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver(new PhoneUnlockedReceiver(), new IntentFilter("android.intent.action.USER_PRESENT"));
 
         //abre a preview da camera
-        dispatchTakePictureIntent();
+        //dispatchTakePictureIntent();
 
         //Listener para o btn criar playlist
         btnCriarPlaylist = findViewById(R.id.btn_criarPlaylist);
@@ -94,7 +94,8 @@ public class MainActivity extends AppCompatActivity {
         if(ContextCompat.checkSelfPermission(this.getApplicationContext(),permissions[0]) == PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(this.getApplicationContext(),permissions[1]) == PackageManager.PERMISSION_GRANTED
                 &&ContextCompat.checkSelfPermission(this.getApplicationContext(),permissions[2]) == PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(this.getApplicationContext(),permissions[3]) == PackageManager.PERMISSION_GRANTED){
+                && ContextCompat.checkSelfPermission(this.getApplicationContext(),permissions[3]) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this.getApplicationContext(),permissions[4]) == PackageManager.PERMISSION_GRANTED){
             Log.d("ok","ok permissions");
 
         }
