@@ -1,218 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
-
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.lmigu.appei.CriarPlaylistActivity">
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <LinearLayout
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="89dp"
+            tools:layout_editor_absoluteY="16dp"
+            android:stretchColumns="0,1" >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+            <TableRow android:layout_height="50dp">
 
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:layout_editor_absoluteX="89dp"
-                    tools:layout_editor_absoluteY="16dp">
+                <TextView
+                    android:layout_width="190dp"
+                    android:layout_height="50dp"
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:text="Music" />
 
-                    <TableRow android:layout_height="50dp">
+                <TextView
+                    android:layout_width="183dp"
+                    android:layout_height="50dp"
+                    android:gravity="right"
+                android:padding="3dip"
+                android:text="Emotion Detected" />
 
-                        <TextView
-                            android:layout_width="183dp"
-                            android:layout_height="50dp"
-                            android:gravity="right"
-                            android:padding="3dip"
-                            android:text="Music" />
-
-
+            </TableRow>
+            <TableRow android:layout_height="50dp">
 
 
-                        <TextView
-                            android:layout_width="183dp"
-                            android:layout_height="50dp"
-                            android:gravity="right"
-                            android:padding="3dip"
-                            android:text="Emotion Detected" />
+                <Button
+                    android:id="@+id/btn_goToYoutube"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Go to youtube" />
 
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Name" />
+            </TableRow>
+        </TableLayout>
 
-                    </TableRow>
-
-                    <TableRow>
-
-                        <Spinner
-                            android:id="@+id/spinner12"
-                            android:textAlignment="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                        </LinearLayout>
-
-
-                    </TableRow>
-
-                    <TableRow>
-
-                        <Spinner
-                            android:id="@+id/spinner2"
-                            android:textAlignment="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp" />
-
-
-                    </TableRow>
-
-                    <TableRow>
-
-                        <Spinner
-                            android:id="@+id/spinner3"
-                            android:textAlignment="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp" />
-
-                        <TextView
-                            android:gravity="right"
-                            android:padding="3dip"
-                            android:text="celula6" />
-
-
-                    </TableRow>
-
-                    <TableRow>
-
-                        <Spinner
-                            android:id="@+id/spinner4"
-                            android:textAlignment="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp" />
-
-                        <TextView
-                            android:gravity="right"
-                            android:padding="3dip"
-                            android:text="celula8" />
-
-
-                    </TableRow>
-
-                    <TableRow>
-
-                        <Spinner
-                            android:id="@+id/spinner5"
-                            android:textAlignment="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp" />
-
-                        <TextView
-                            android:gravity="right"
-                            android:padding="3dip"
-                            android:text="celula10" />
-
-
-                    </TableRow>
-
-                    <TableRow>
-
-                        <Spinner
-                            android:id="@+id/spinner6"
-                            android:textAlignment="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp" />
-
-                        <TextView
-                            android:gravity="right"
-                            android:padding="3dip"
-                            android:text="celula4" />
-
-
-                    </TableRow>
-
-                    <TableRow>
-
-                        <Spinner
-                            android:id="@+id/spinner7"
-                            android:textAlignment="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp" />
-
-                        <TextView
-                            android:gravity="right"
-                            android:padding="3dip"
-                            android:text="celula2" />
-
-
-                    </TableRow>
-
-                    <TableRow>
-
-                        <Spinner
-                            android:id="@+id/spinner8"
-                            android:textAlignment="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"/>
-
-                        <TextView
-                            android:gravity="right"
-                            android:padding="3dip"
-                            android:text="celula2" />
-
-
-                    </TableRow>
-
-                    <TableRow>
-
-                        <Spinner
-                            android:id="@+id/spinner9"
-                            android:textAlignment="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp" />
-
-                        <TextView
-                            android:gravity="right"
-                            android:padding="3dip"
-                            android:text="celula2" />
-
-
-                    </TableRow>
-
-                    <TableRow>
-
-                        <Spinner
-                            android:id="@+id/spinner10"
-                            android:textAlignment="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp" />
-
-                        <TextView
-                            android:gravity="right"
-                            android:padding="3dip"
-                            android:text="celula2" />
-
-
-                    </TableRow>
-                    e
-                </TableLayout>
-            </LinearLayout>
-        </LinearLayout>
     </ScrollView>
-
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="210dp" />
 
 </LinearLayout>

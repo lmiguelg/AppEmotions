@@ -23,6 +23,7 @@ import android.widget.Button;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -34,11 +35,13 @@ public class MainActivity extends AppCompatActivity {
     Button btnShowEmotion;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        GlobalVars.urlsYoutube = new ArrayList<>();
         verifyPermissions();
 
         //executa uma ação depois do unlock do telemovel
@@ -51,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
         btnCriarPlaylist = findViewById(R.id.btn_criarPlaylist);
         btnCriarPlaylist.setOnClickListener(new View.OnClickListener(){
 
-            public void onClick (View v){
-
+            @Override
+            public void onClick(View v) {
                 changeActivity(new CriarPlaylistActivity () );
             }
         });
@@ -61,9 +64,7 @@ public class MainActivity extends AppCompatActivity {
         btnOuvirMusica.setOnClickListener(new View.OnClickListener(){
 
             public void onClick (View v){
-
                 changeActivity(new MusicPlayerActivity () );
-
             }
         });
         btnShowEmotion = findViewById(R.id.btn_show_emotion);
