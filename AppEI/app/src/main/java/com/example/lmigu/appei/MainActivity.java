@@ -6,6 +6,7 @@ import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -20,12 +21,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Locale;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         GlobalVars.urlsYoutube = new ArrayList<>();
+        inicializaDadosStorage();
         verifyPermissions();
 
         //executa uma ação depois do unlock do telemovel
@@ -149,5 +155,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    public void inicializaDadosStorage(){
+
+        SharedPreferences pSharedPref = getApplicationContext().getSharedPreferences("videosURL", Context.MODE_PRIVATE);
+        Map<String, ?> allEntries = pSharedPref.getAll();
+        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+            GlobalVars.playlist.getMapPlaylist().put(entry.getKey(),entry.getValue().toString());
+        }
     }
 }

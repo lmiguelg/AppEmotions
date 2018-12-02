@@ -14,7 +14,7 @@ public class GlobalVars {
 
     public static Playlist playlist = new Playlist();
 
-    public static final String YoutubeAPIKey = "AIzaSyDxmT_VlAU989cWBo-6jEz_14k71qEdmr";
+
 
     public static ArrayList<String> urlsYoutube;
 

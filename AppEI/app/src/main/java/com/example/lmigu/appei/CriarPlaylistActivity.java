@@ -1,19 +1,26 @@
 package com.example.lmigu.appei;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class CriarPlaylistActivity extends AppCompatActivity {
@@ -32,6 +39,8 @@ public class CriarPlaylistActivity extends AppCompatActivity {
     ImageButton btnNeutral;
     ImageButton btnAngry;
     Uri audioFileUri;
+    int width;
+    TableLayout tableMusicEmotion;
     Spinner spinnerMusicas, spinnerMusicas2,spinnerMusicas3,spinnerMusicas4,spinnerMusicas5,spinnerMusicas6,spinnerMusicas7,spinnerMusicas8,spinnerMusicas9,spinnerMusicas10;
     public static Integer[] imageEmoji = {R.drawable.happy_emoji,R.drawable.neutral_emoji,R.drawable.sad_emoji};
     public static  String [] imageEmojiString = {"happy","neutral","sad"};
@@ -40,24 +49,40 @@ public class CriarPlaylistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_criar_playlist);
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        width = displaymetrics.widthPixels;
+        int width = displaymetrics.widthPixels;
         webview = findViewById(R.id.webview);
+        tableMusicEmotion = findViewById(R.id.tableMusicEmotion);
+        criaTabelaMusicas();
         //btn to youtube and find new new playlist
         criarViewGoYoutube();
 
 
-        //receber dados do youtube e guardar no array das musicas
+        //receber dados do youtube e guardar no array das musicas e no storage
         getYoutubeUrls();
 
     }
+    public void criaTabelaMusicas(){
 
-//    @Override
-//    protected void onRestart() {
-//        super.onRestart();
-//        startActivity(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        finish();
-//
-//
-//    }
+        for(int i = 0; i < playlist.getMapPlaylist().size(); i++){
+            TableRow newRow = new TableRow(this);
+            TextView txt = new TextView(this);
+            txt.setText(playlist.getMapPlaylist().values().toArray()[i].toString());
+            txt.setMaxWidth(width/2);
+            txt.setHeight(150);
+            newRow.addView(txt);
+
+            Spinner spinner = new Spinner(this);
+
+            tableMusicEmotion.addView(newRow);
+        }
+
+
+
+
+    }
 
     @Override
     protected void onPause() {
@@ -103,20 +128,31 @@ public class CriarPlaylistActivity extends AppCompatActivity {
             int i = videoTitle.split(" ").length;
             String videoTitleFinal = videoTitle3.split(videoTitle.split(" ")[i-2])[0];
 
-            //adicionar ao array principal das musicas
-            GlobalVars.urlsYoutube.add(urlReceived);
-
             //adicionar á playlist
             playlist.append(urlReceived);
-
+            playlist.getMapPlaylist().put(urlReceived,videoTitleFinal);
+            saveData(urlReceived,videoTitleFinal);
             System.out.println(playlist.getPlaylist());
-            System.out.println(videoTitle);
-            playlist.getPlaylist();
+            System.out.println("Video hash: "+ playlist.getMapPlaylist());
+            System.out.println("keysss: "+playlist.getMapPlaylist().values().toArray()[0]);
 
+            SharedPreferences sharedPreferences = getSharedPreferences("videosURL", Context.MODE_PRIVATE);
+            System.out.println(sharedPreferences.getAll());
         }
 
-        webview.clearFormData();
+            webview.clearFormData();
     }
+    public void saveData(String url, String name){
+        SharedPreferences sharedPreferences = getSharedPreferences("videosURL", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(url,name);
+        editor.apply();
+        //editor.clear();
+        //editor.commit();
 
 
+
+
+
+    }
 }
