@@ -13,6 +13,8 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -20,8 +22,15 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import javax.microedition.khronos.opengles.GL;
 
 public class CriarPlaylistActivity extends AppCompatActivity {
 
@@ -40,10 +49,11 @@ public class CriarPlaylistActivity extends AppCompatActivity {
     ImageButton btnAngry;
     Uri audioFileUri;
     int width;
+    private String selecteditem;
     TableLayout tableMusicEmotion;
-    Spinner spinnerMusicas, spinnerMusicas2,spinnerMusicas3,spinnerMusicas4,spinnerMusicas5,spinnerMusicas6,spinnerMusicas7,spinnerMusicas8,spinnerMusicas9,spinnerMusicas10;
-    public static Integer[] imageEmoji = {R.drawable.happy_emoji,R.drawable.neutral_emoji,R.drawable.sad_emoji};
-    public static  String [] imageEmojiString = {"happy","neutral","sad"};
+    public static  String [] imageEmojiString = {"","happy","neutral","sad"};
+    public Map<String,String> mapMusicEmotion = GlobalVars.mapMusicEmotion;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +76,7 @@ public class CriarPlaylistActivity extends AppCompatActivity {
     }
     public void criaTabelaMusicas(){
 
+
         for(int i = 0; i < playlist.getMapPlaylist().size(); i++){
             TableRow newRow = new TableRow(this);
             TextView txt = new TextView(this);
@@ -74,26 +85,81 @@ public class CriarPlaylistActivity extends AppCompatActivity {
             txt.setHeight(150);
             newRow.addView(txt);
 
-            Spinner spinner = new Spinner(this);
+            final Spinner spinner = new Spinner(this);
+            spinner.setId(i);
+
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                @Override
+                public void onItemSelected(AdapterView adapter, View view, int i, long id) {
+                    selecteditem =  adapter.getItemAtPosition(i).toString();
+                    System.out.println(selecteditem);
+                    GlobalVars.emotionSequence.add(spinner.getId(),selecteditem);
+                    if(GlobalVars.emotionSequence.size() > GlobalVars.playlist.getMapPlaylist().size() ){
+
+                        GlobalVars.emotionSequence.remove((spinner.getId()) + 1);
+                    }
+
+
+
+
+
+
+
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                    this, android.R.layout.simple_spinner_item, imageEmojiString);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+            spinner.setSelection(selectSpinner(spinner));
+            newRow.addView(spinner);
+
 
             tableMusicEmotion.addView(newRow);
+
         }
 
 
+    }
+    public int selectSpinner(Spinner spinner){
 
-
+        String temp = GlobalVars.emotionSequence.get(spinner.getId());
+        if(temp.contains("happy"))return 1;
+        if(temp.contains("neutral"))return 2;
+        if(temp.contains("sad")) return 3;
+        else return 0;
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        finish();
+        saveDataEmotions();
+
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        saveDataEmotions();
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        saveDataEmotions();
+
+        webview.clearHistory();
+        webview.clearCache(true);
+        webview.destroy();
+        webview = null;
     }
 
     public void criarViewGoYoutube(){
@@ -110,9 +176,12 @@ public class CriarPlaylistActivity extends AppCompatActivity {
     }
     public void onBackPressed(){
         if (webview.isFocused() && webview.canGoBack()) {
-            webview.goBack();
+            webview.destroy();
         }
         else {
+            Intent intent = new Intent(CriarPlaylistActivity.this, MainActivity.class);
+            CriarPlaylistActivity.this.finish();
+            startActivity(intent);
             super.onBackPressed();
         }
 
@@ -150,9 +219,27 @@ public class CriarPlaylistActivity extends AppCompatActivity {
         //editor.clear();
         //editor.commit();
 
+    }
+    public void saveDataEmotions(){
+        SharedPreferences sharedPrefEmotion = getSharedPreferences("emotions", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPrefEmotion.edit();
 
+        Gson gson = new Gson();
+        String jsonFavorites = gson.toJson(GlobalVars.emotionSequence);
 
+        editor.putString("key", jsonFavorites);
+        editor.apply();
+//        editor.clear();
+//        editor.commit();
 
+        System.out.println(sharedPrefEmotion.getAll());
+
+    }
+
+    public void changeActivity(Activity activity){//função para mudar de atividade
+        Class myActivity = activity.getClass();
+        Intent intent = new Intent(CriarPlaylistActivity.this, myActivity);
+        startActivity(intent);
 
     }
 }

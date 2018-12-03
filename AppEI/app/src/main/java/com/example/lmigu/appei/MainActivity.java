@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -42,19 +45,24 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         GlobalVars.urlsYoutube = new ArrayList<>();
+        GlobalVars.emotionSequence = new ArrayList<>();
         inicializaDadosStorage();
         verifyPermissions();
+
+
+
 
         //executa uma ação depois do unlock do telemovel
         registerReceiver(new PhoneUnlockedReceiver(), new IntentFilter("android.intent.action.USER_PRESENT"));
 
         //abre a preview da camera
-        //dispatchTakePictureIntent();
+        dispatchTakePictureIntent();
 
         //Listener para o btn criar playlist
         btnCriarPlaylist = findViewById(R.id.btn_criarPlaylist);
@@ -80,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
                 changeActivity(new ShowEmotionActivity());
             }
         });
+
+        System.out.println(GlobalVars.mapMusicEmotion.values());
 
     }
 
@@ -155,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+
     }
 
     public void inicializaDadosStorage(){
@@ -164,5 +175,14 @@ public class MainActivity extends AppCompatActivity {
         for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
             GlobalVars.playlist.getMapPlaylist().put(entry.getKey(),entry.getValue().toString());
         }
+
+        SharedPreferences sharedPrefEmotion = getApplicationContext().getSharedPreferences("emotions", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPrefEmotion.getString("key", "");
+        ArrayList temp = new ArrayList();
+        temp = gson.fromJson(json,ArrayList.class);
+        GlobalVars.emotionSequence = temp;
+        System.out.println(GlobalVars.emotionSequence);
+
     }
 }
