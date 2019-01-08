@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import javax.microedition.khronos.opengles.GL;
 
@@ -118,6 +119,7 @@ public class CriarPlaylistActivity extends AppCompatActivity {
                     this, android.R.layout.simple_spinner_item, imageEmojiString);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
+            //caso a activity criar playlist esteja a crashar comentar a proxima linha e vai limpar todas as emoções guarddas
             spinner.setSelection(selectSpinner(spinner));
             newRow.addView(spinner);
 
@@ -141,7 +143,15 @@ public class CriarPlaylistActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         saveDataEmotions();
+        finish();
 
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        saveDataEmotions();
+        finish();
     }
 
     @Override
@@ -186,16 +196,20 @@ public class CriarPlaylistActivity extends AppCompatActivity {
         }
 
     }
+
     public void getYoutubeUrls(){
         Bundle extras = getIntent().getExtras();
 
         if(extras!=null) {
             String urlReceived = extras.getString(Intent.EXTRA_TEXT);
-            String videoTitle = extras.getString(Intent.EXTRA_SUBJECT).split(Character.toString((char)24))[0];
-            String videoTitle2 = videoTitle.split(" ")[0];
-            String videoTitle3 = videoTitle.split(videoTitle2)[1];
-            int i = videoTitle.split(" ").length;
-            String videoTitleFinal = videoTitle3.split(videoTitle.split(" ")[i-2])[0];
+            String videoTitle = extras.getString(Intent.EXTRA_SUBJECT).split(Pattern.quote("Watch \""))[1];
+            String videoTitle2 = videoTitle.split(Pattern.quote("\" on Youtube"))[0];
+//            String videoTitle3 = videoTitle.split(videoTitle2)[1];
+//            int i = videoTitle.split(" ").length;
+
+
+
+            String videoTitleFinal = videoTitle2;
 
             //adicionar á playlist
             playlist.append(urlReceived);
@@ -216,8 +230,8 @@ public class CriarPlaylistActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(url,name);
         editor.apply();
-        //editor.clear();
-        //editor.commit();
+//        editor.clear();
+//        editor.commit();
 
     }
     public void saveDataEmotions(){

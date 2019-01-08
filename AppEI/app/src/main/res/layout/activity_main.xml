@@ -12,31 +12,21 @@
         android:id="@+id/btn_criarPlaylist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/btn_show_emotion"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="354dp"
-        android:text="Criar playlist"
+        android:layout_marginTop="64dp"
+        android:text="CREATE YOUR PLAYLIST"
         android:textSize="30sp" />
 
-
-    <Button
-        android:id="@+id/btn_ouvirMusica"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/btn_criarPlaylist"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="40dp"
-        android:text="Ouvir música"
-        android:textSize="30sp" />
 
     <Button
         android:id="@+id/btn_show_emotion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_ouvirMusica"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="111dp"
-        android:text="Emotion"
+        android:layout_marginTop="102dp"
+        android:text="GET YOUR EMOTION"
         android:textSize="30sp" />
 
 

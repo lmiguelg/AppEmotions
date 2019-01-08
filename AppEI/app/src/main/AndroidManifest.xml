@@ -36,7 +36,6 @@
                 <data android:host="www.youtube.com" android:mimeType="text/*" />
             </intent-filter>
         </activity>
-        <activity android:name=".MusicPlayerActivity" />
         <activity android:name=".ShowEmotionActivity">
 
         </activity>

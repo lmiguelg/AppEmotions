@@ -11,8 +11,10 @@
         android:id="@+id/textViewEmotion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Emoção detetada é: "
+        android:text="Your Emotion"
+        android:textAlignment="center"
         android:textSize="24dp"
+        android:textStyle="bold"
         tools:layout_editor_absoluteX="163dp"
         tools:layout_editor_absoluteY="68dp" />
 
@@ -21,6 +23,17 @@
         android:layout_width="match_parent"
         android:layout_height="231dp"
         app:srcCompat="@drawable/ic_launcher_foreground" />
+
+    <Button
+        android:id="@+id/btnPlayMusic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Play Music" />
+
+    <WebView
+        android:id="@+id/webviewPlayMusic"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>

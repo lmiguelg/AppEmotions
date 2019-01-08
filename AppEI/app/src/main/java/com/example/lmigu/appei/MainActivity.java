@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.StrictMode;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 1;
     Button btnCriarPlaylist;
-    Button btnOuvirMusica;
+
     Button btnShowEmotion;
 
 
@@ -74,13 +75,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnOuvirMusica = findViewById(R.id.btn_ouvirMusica);
-        btnOuvirMusica.setOnClickListener(new View.OnClickListener(){
 
-            public void onClick (View v){
-                changeActivity(new MusicPlayerActivity () );
-            }
-        });
         btnShowEmotion = findViewById(R.id.btn_show_emotion);
         btnShowEmotion.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -128,14 +123,14 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.setVmPolicy(builder.build());
 
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        takePictureIntent.putExtra("android.intent.extras.CAMERA_FACING", 1);
 
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             Uri photoUri = Uri.fromFile(getOutputPhotoFile());
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-            takePictureIntent.putExtra("android.intent.extras.CAMERA_FACING", android.hardware.Camera.CameraInfo.CAMERA_FACING_FRONT);
-            takePictureIntent.putExtra("android.intent.extras.LENS_FACING_FRONT", 1);
-            takePictureIntent.putExtra("android.intent.extra.USE_FRONT_CAMERA", true);
-            startActivityForResult(takePictureIntent, 0);
+            //takePictureIntent.putExtra("android.intent.extras.LENS_FACING_FRONT", 1);
+            //takePictureIntent.putExtra("android.intent.extra.USE_FRONT_CAMERA", true);
+            startActivityForResult(takePictureIntent, 1);
         }
     }
 
