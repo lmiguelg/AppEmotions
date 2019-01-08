@@ -51,40 +51,46 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        GlobalVars.urlsYoutube = new ArrayList<>();
-        GlobalVars.emotionSequence = new ArrayList<>();
-        inicializaDadosStorage();
-        verifyPermissions();
+        try{
+
+
+            GlobalVars.urlsYoutube = new ArrayList<>();
+            GlobalVars.emotionSequence = new ArrayList<>();
+            inicializaDadosStorage();
+            verifyPermissions();
 
 
 
 
-        //executa uma ação depois do unlock do telemovel
-        registerReceiver(new PhoneUnlockedReceiver(), new IntentFilter("android.intent.action.USER_PRESENT"));
+            //executa uma ação depois do unlock do telemovel
+            registerReceiver(new PhoneUnlockedReceiver(), new IntentFilter("android.intent.action.USER_PRESENT"));
 
-        //abre a preview da camera
-        dispatchTakePictureIntent();
+            //abre a preview da camera
+            dispatchTakePictureIntent();
 
-        //Listener para o btn criar playlist
-        btnCriarPlaylist = findViewById(R.id.btn_criarPlaylist);
-        btnCriarPlaylist.setOnClickListener(new View.OnClickListener(){
+            //Listener para o btn criar playlist
+            btnCriarPlaylist = findViewById(R.id.btn_criarPlaylist);
+            btnCriarPlaylist.setOnClickListener(new View.OnClickListener(){
 
-            @Override
-            public void onClick(View v) {
-                changeActivity(new CriarPlaylistActivity () );
-            }
-        });
+                @Override
+                public void onClick(View v) {
+                    changeActivity(new CriarPlaylistActivity () );
+                }
+            });
 
 
-        btnShowEmotion = findViewById(R.id.btn_show_emotion);
-        btnShowEmotion.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                changeActivity(new ShowEmotionActivity());
-            }
-        });
+            btnShowEmotion = findViewById(R.id.btn_show_emotion);
+            btnShowEmotion.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    changeActivity(new ShowEmotionActivity());
+                }
+            });
 
-        System.out.println(GlobalVars.mapMusicEmotion.values());
+            System.out.println(GlobalVars.mapMusicEmotion.values());
+        }catch(Exception e){
+
+        }
 
     }
 
@@ -119,24 +125,35 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void dispatchTakePictureIntent() {
+
+        try{
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        takePictureIntent.putExtra("android.intent.extras.CAMERA_FACING", 1);
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            takePictureIntent.putExtra("android.intent.extras.CAMERA_FACING", 1);
 
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            Uri photoUri = Uri.fromFile(getOutputPhotoFile());
-            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-            //takePictureIntent.putExtra("android.intent.extras.LENS_FACING_FRONT", 1);
-            //takePictureIntent.putExtra("android.intent.extra.USE_FRONT_CAMERA", true);
-            startActivityForResult(takePictureIntent, 1);
-        }
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+
+                if(Uri.fromFile(getOutputPhotoFile()) != null){
+
+
+
+
+                Uri photoUri = Uri.fromFile(getOutputPhotoFile());
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                //takePictureIntent.putExtra("android.intent.extras.LENS_FACING_FRONT", 1);
+                //takePictureIntent.putExtra("android.intent.extra.USE_FRONT_CAMERA", true);
+                startActivityForResult(takePictureIntent, 1);
+                }
+            }
+        }catch(Exception e){}
     }
 
 
     //gurda a foto num diretorio definido
     private File getOutputPhotoFile() {
+
         File directory = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES), getPackageName());
         if (!directory.exists()) {
@@ -154,7 +171,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Bitmap bitmap = (Bitmap)data.getExtras().get("data");
+        try{
+            Bitmap bitmap = (Bitmap)data.getExtras().get("data");
+        }catch(Exception e){
+
+        }
+
+
     }
 
     @Override
@@ -179,5 +202,13 @@ public class MainActivity extends AppCompatActivity {
         GlobalVars.emotionSequence = temp;
         System.out.println(GlobalVars.emotionSequence);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        try{
+
+        }catch (Exception e){}
     }
 }

@@ -60,6 +60,9 @@ public class CriarPlaylistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_criar_playlist);
+        try{
+
+
         DisplayMetrics displaymetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         width = displaymetrics.widthPixels;
@@ -73,6 +76,9 @@ public class CriarPlaylistActivity extends AppCompatActivity {
 
         //receber dados do youtube e guardar no array das musicas e no storage
         getYoutubeUrls();
+        }catch(Exception e){
+
+        }
 
     }
     public void criaTabelaMusicas(){
@@ -100,13 +106,6 @@ public class CriarPlaylistActivity extends AppCompatActivity {
 
                         GlobalVars.emotionSequence.remove((spinner.getId()) + 1);
                     }
-
-
-
-
-
-
-
 
                 }
 
@@ -151,7 +150,7 @@ public class CriarPlaylistActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         saveDataEmotions();
-        finish();
+
     }
 
     @Override
